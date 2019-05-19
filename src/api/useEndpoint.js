@@ -14,7 +14,7 @@ axios.interceptors.request.use(config => {
 	const { token } = config
 
 	if (!isEmpty(token)) {
-		config.headers['Authorization'] = `Bearer ${token}`
+		config.headers['X-SBG-Auth-Token'] = token
 	}
 
 	return config
