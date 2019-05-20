@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Container, Menu, Segment } from 'semantic-ui-react'
+import { Container, Menu } from 'semantic-ui-react'
 
 import { Tasks } from './components'
 
@@ -20,9 +20,7 @@ function App() {
 				</Menu.Menu>
 			</Menu>
 
-			<Segment>
-				<Tasks />
-			</Segment>
+			<Tasks />
 		</StyledContainer>
 	)
 }
