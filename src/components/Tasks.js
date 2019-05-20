@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Segment, Dropdown } from 'semantic-ui-react'
+import { Segment, Dropdown, Dimmer, Loader } from 'semantic-ui-react'
 
 import TaskList from './TaskList'
 import { useApiGet } from '../api'
@@ -46,12 +46,15 @@ const Tasks = props => {
 				labeled
 				button
 				className="icon"
-				size="small"
 				options={limitOptions}
 				onChange={handleLimitChange}
 				value={limit}
 			/>
 			<Segment>
+				<Dimmer active={tasks.loading}>
+					<Loader />
+				</Dimmer>
+
 				<TaskList tasks={tasks} />
 			</Segment>
 		</>

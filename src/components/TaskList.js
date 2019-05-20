@@ -6,11 +6,15 @@ const StyledButton = styled(Button)`
 	float: right;
 `
 
+const StyledList = styled(List)`
+	margin-top: 0 !important;
+`
+
 const TaskList = props => {
 	console.log('TASKS: ', props.tasks)
 
 	return (
-		<List divided relaxed>
+		<StyledList divided relaxed>
 			<List.Item>
 				<StyledButton color="red" icon="remove" basic size="small" />
 				<List.Content>
@@ -42,7 +46,7 @@ const TaskList = props => {
 					</List.Description>
 				</List.Content>
 			</List.Item>
-		</List>
+		</StyledList>
 	)
 }
 
