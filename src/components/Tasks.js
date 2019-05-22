@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Segment, Dropdown, Dimmer, Loader } from 'semantic-ui-react'
+import { Segment, Dropdown } from 'semantic-ui-react'
 
 import TaskList from './TaskList'
 import { useApiGet } from '../api'
@@ -24,12 +24,49 @@ const limitOptions = [
 	},
 ]
 
-const Tasks = props => {
+const statusOptions = [
+	{
+		key: 'QUEUED',
+		text: 'Queued',
+		value: 'QUEUED',
+	},
+	{
+		key: 'DRAFT',
+		text: 'Draft',
+		value: 'DRAFT',
+	},
+	{
+		key: 'RUNNING',
+		text: 'Running',
+		value: 'RUNNING',
+	},
+	{
+		key: 'COMPLETED',
+		text: 'Completed',
+		value: 'COMPLETED',
+	},
+	{
+		key: 'ABORTED',
+		text: 'Aborted',
+		value: 'ABORTED',
+	},
+	{
+		key: 'FAILED',
+		text: 'Failed',
+		value: 'FAILED',
+	},
+]
+
+const Tasks = ({ history }) => {
 	const [tasks, getTasks] = useApiGet(tasksURL)
 	const [limit, setLimit] = useState()
+	const [status, setStatus] = useState()
 
-	const limitText = limit ? `Items per Page ${limit}` : 'Items per Page'
+	const limitText = limit ? `Items per Page: ${limit}` : 'Items per Page'
+	const statusText = status ? status : 'Filter by Status'
+
 	const handleLimitChange = (e, { value }) => setLimit(value)
+	const handleStatusChange = (e, { value }) => setStatus(value)
 
 	useEffect(() => {
 		getTasks({
@@ -50,12 +87,20 @@ const Tasks = props => {
 				onChange={handleLimitChange}
 				value={limit}
 			/>
-			<Segment>
-				<Dimmer active={tasks.loading}>
-					<Loader />
-				</Dimmer>
+			<Dropdown
+				text={statusText}
+				icon="filter"
+				floating
+				labeled
+				button
+				className="icon"
+				options={statusOptions}
+				onChange={handleStatusChange}
+				value={status}
+			/>
 
-				<TaskList tasks={tasks} />
+			<Segment>
+				<TaskList tasks={tasks} history={history} />
 			</Segment>
 		</>
 	)
