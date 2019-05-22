@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { List, Button } from 'semantic-ui-react'
+import { List, Button, Dimmer, Loader } from 'semantic-ui-react'
 
 const StyledButton = styled(Button)`
 	float: right;
@@ -10,43 +10,40 @@ const StyledList = styled(List)`
 	margin-top: 0 !important;
 `
 
-const TaskList = props => {
-	console.log('TASKS: ', props.tasks)
+const TaskList = ({ tasks, history }) => {
+	const handleClick = e => {
+		const { id } = e.currentTarget.dataset
+		history.push(`/tasks/${id}`)
+	}
+
+	const mapTasks = tasks => {
+		if (tasks.data) {
+			return tasks.data.items.map(item => (
+				<List.Item
+					key={item.id}
+					style={{ cursor: 'pointer' }}
+					data-id={item.id}
+					onClick={handleClick}
+				>
+					<StyledButton color="red" icon="remove" basic />
+					<List.Content>
+						<List.Header as="a">{item.name}</List.Header>
+						<List.Description>{item.project}</List.Description>
+					</List.Content>
+				</List.Item>
+			))
+		}
+	}
 
 	return (
-		<StyledList divided relaxed>
-			<List.Item>
-				<StyledButton color="red" icon="remove" basic size="small" />
-				<List.Content>
-					<List.Header as="a">Semantic-Org/Semantic-UI</List.Header>
-					<List.Description as="a">
-						Updated 10 mins ago
-					</List.Description>
-				</List.Content>
-			</List.Item>
-			<List.Item>
-				<List.Icon name="github" size="large" verticalAlign="middle" />
-				<List.Content>
-					<List.Header as="a">
-						Semantic-Org/Semantic-UI-Docs
-					</List.Header>
-					<List.Description as="a">
-						Updated 22 mins ago
-					</List.Description>
-				</List.Content>
-			</List.Item>
-			<List.Item>
-				<List.Icon name="github" size="large" verticalAlign="middle" />
-				<List.Content>
-					<List.Header as="a">
-						Semantic-Org/Semantic-UI-Meteor
-					</List.Header>
-					<List.Description as="a">
-						Updated 34 mins ago
-					</List.Description>
-				</List.Content>
-			</List.Item>
-		</StyledList>
+		<>
+			<Dimmer active={tasks.loading}>
+				<Loader />
+			</Dimmer>
+			<StyledList divided relaxed>
+				{mapTasks(tasks)}
+			</StyledList>
+		</>
 	)
 }
 
