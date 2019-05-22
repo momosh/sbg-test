@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Container, Menu } from 'semantic-ui-react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import { Tasks } from './components'
+import { Home, Tasks, TasksDetails } from './components'
 
 const StyledContainer = styled(Container)`
 	margin-top: 25px;
@@ -20,7 +21,11 @@ function App() {
 				</Menu.Menu>
 			</Menu>
 
-			<Tasks />
+			<Router>
+				<Route path="/" exact component={Home} />
+				<Route path="/tasks" exact component={Tasks} />
+				<Route path="/tasks/:id" component={TasksDetails} />
+			</Router>
 		</StyledContainer>
 	)
 }
