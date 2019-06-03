@@ -25,6 +25,7 @@ const useEndpoint = fn => {
 		data: null,
 		loading: false,
 		error: false,
+		message: null,
 	})
 	const [req, setReq] = useState()
 
@@ -54,6 +55,7 @@ const useEndpoint = fn => {
 				data: null,
 				loading: false,
 				error: true,
+				message: err.message,
 			})
 		}
 	}
