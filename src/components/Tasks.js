@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Segment, Dropdown } from 'semantic-ui-react'
 
+import AddModal from './AddModal'
 import TaskList from './TaskList'
 import { useApiGet } from '../api'
 
@@ -105,6 +106,7 @@ const Tasks = ({ history }) => {
 				onChange={handleStatusChange}
 				value={status}
 			/>
+			<AddModal />
 
 			<Segment style={{ marginBottom: '25px' }}>
 				<TaskList tasks={tasks} history={history} filter={status} />

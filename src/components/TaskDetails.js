@@ -9,6 +9,7 @@ import {
 	Message,
 } from 'semantic-ui-react'
 
+import AddModal from './AddModal'
 import Placeholder from './Placeholder'
 import { useApiGet, useApiRemove } from '../api'
 
@@ -30,6 +31,7 @@ const TaskDetails = props => {
 
 	return (
 		<>
+			<AddModal />
 			<Segment>
 				<Header as="h1">Task Details</Header>
 
