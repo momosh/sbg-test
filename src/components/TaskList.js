@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { List, Button, Dimmer, Loader } from 'semantic-ui-react'
-
-const StyledButton = styled(Button)`
-	float: right;
-`
+import { List, Dimmer, Loader } from 'semantic-ui-react'
 
 const StyledList = styled(List)`
 	margin-top: 0 !important;
@@ -19,14 +15,12 @@ const TaskList = ({ tasks, history }) => {
 	const mapTasks = tasks => {
 		if (tasks.data) {
 			return tasks.data.items.map(item => (
-				<List.Item
-					key={item.id}
-					style={{ cursor: 'pointer' }}
-					data-id={item.id}
-					onClick={handleClick}
-				>
-					<StyledButton color="red" icon="remove" basic />
-					<List.Content>
+				<List.Item key={item.id}>
+					<List.Content
+						data-id={item.id}
+						onClick={handleClick}
+						style={{ cursor: 'pointer' }}
+					>
 						<List.Header as="a">{item.name}</List.Header>
 						<List.Description>{item.project}</List.Description>
 					</List.Content>
