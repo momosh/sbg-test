@@ -22,7 +22,7 @@ const TaskList = ({ tasks, history, filter }) => {
 				<Message
 					color="purple"
 					header="Hmm, seems we got nothing now"
-					content="Maybe try and change those filters"
+					content="Maybe try changing those filters"
 				/>
 			)
 		}
