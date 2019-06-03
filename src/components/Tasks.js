@@ -26,6 +26,11 @@ const limitOptions = [
 
 const statusOptions = [
 	{
+		key: 'NOFILTER',
+		text: 'No filter',
+		value: null,
+	},
+	{
 		key: 'QUEUED',
 		text: 'Queued',
 		value: 'QUEUED',
@@ -102,7 +107,7 @@ const Tasks = ({ history }) => {
 			/>
 
 			<Segment style={{ marginBottom: '25px' }}>
-				<TaskList tasks={tasks} history={history} />
+				<TaskList tasks={tasks} history={history} filter={status} />
 			</Segment>
 		</>
 	)

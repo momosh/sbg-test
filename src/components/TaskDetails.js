@@ -28,8 +28,6 @@ const TaskDetails = props => {
 
 	const handleRemoveTask = () => deleteTask()
 
-	console.log('YO', deleteStatus)
-
 	return (
 		<>
 			<Segment>
