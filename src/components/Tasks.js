@@ -62,7 +62,9 @@ const Tasks = ({ history }) => {
 	const [limit, setLimit] = useState()
 	const [status, setStatus] = useState()
 
-	const limitText = limit ? `Items per Page: ${limit}` : 'Items per Page'
+	const limitText = limit
+		? `Showing ${limit} Items`
+		: 'Limit Number of Results'
 	const statusText = status ? status : 'Filter by Status'
 
 	const handleLimitChange = (e, { value }) => setLimit(value)
@@ -99,7 +101,7 @@ const Tasks = ({ history }) => {
 				value={status}
 			/>
 
-			<Segment>
+			<Segment style={{ marginBottom: '25px' }}>
 				<TaskList tasks={tasks} history={history} />
 			</Segment>
 		</>
